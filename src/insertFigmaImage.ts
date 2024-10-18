@@ -8,18 +8,16 @@ import { getPropertiesService } from "./utils/getPropertiesService";
 declare const global: {
   [x: string]: (
     targetId: string,
-    outputCell?: string,
     figmaFileKey?: string,
     figmaApiToken?: string
-  ) => void;
+  ) => string;
 };
 
 function insertFigmaImage(
   targetId: string,
-  outputCell?: string,
   figmaFileKey?: string,
   figmaApiToken?: string
-): void {
+): string {
   const FIGMA_API_TOKEN = figmaFileKey
     ? figmaFileKey
     : getPropertiesService("FIGMA_API_TOKEN");
@@ -27,9 +25,8 @@ function insertFigmaImage(
     ? figmaApiToken
     : getPropertiesService("FIGMA_FILE_KEY");
 
-  const imageUrl = getFigmaImage("1:7", FIGMA_FILE_KEY, FIGMA_API_TOKEN);
-  insertImageToSheet(imageUrl, outputCell);
-  console.log(imageUrl);
+  const imageUrl = getFigmaImage(targetId, FIGMA_FILE_KEY, FIGMA_API_TOKEN);
+  return imageUrl;
 }
 
 global.insertFigmaImage = insertFigmaImage;

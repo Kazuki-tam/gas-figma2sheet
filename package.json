@@ -8,7 +8,7 @@
     "clean": "rimraf dist",
     "postBuild": "bun run _tasks/build.ts",
     "copy": "bun run _tasks/copy.ts",
-    "release": "npm-run-all copy postBuild clasp:push",
+    "deploy": "npm-run-all clean copy postBuild clasp:push",
     "clasp:push": "clasp push -f",
     "clasp:open": "clasp open",
     "clasp:login": "clasp login",

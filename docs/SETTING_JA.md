@@ -23,6 +23,8 @@ App Scriptプロジェクトに以下のスクリプトプロパティを設定�
 
 - `FIGMA_API_TOKEN`: あなたのFigmaパーソナルアクセストークン
 - `FIGMA_FILE_KEY`: インポートしたいFigmaファイルのキー
+- `OPENAI_API_KEY`: OpenAI APIキー（オプション / AIによる生成処理では必須）
+- `OPENAI_MODEL`: OpenAIモデル（オプション）
 
 ![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/jgg8v3fazw9pk7jyzqly.png)
 
@@ -38,11 +40,14 @@ FigmaファイルURLの全体構成：
 - カスタムメニューとして使用する方法
 
 ### カスタム関数
-`FIGMA_IMAGE_URL`カスタム関数を使用して、FigmaデータをGoogle Sheetsにインポートできます。最初の引数としてノードIDを指定して画像として出力します。ノードIDはFigma URLから取得できます。URLの`node-id=x-x`の部分がノードIDです。
+カスタム関数を使用して、FigmaデータをGoogle Sheetsにインポートできます。最初の引数としてノードIDを指定して画像として出力します。ノードIDはFigma URLから取得できます。URLの`node-id=x-x`の部分がノードIDです。
 
 `https://www.figma.com/design/[file_key]/[file_name]?node-id=x-x`
 
 ノードIDは`0:1`のような形式で指定します。
+
+#### `FIGMA_IMAGE_URL`関数
+FigmaノードIDを指定して、画像URLを取得します。
 
 ```
 =FIGMA_IMAGE_URL("node-id")
@@ -53,6 +58,27 @@ FigmaファイルURLの全体構成：
 ```
 =IMAGE(FIGMA_IMAGE_URL("node-id"))
 ```
+
+#### `FIGMA_HTML`関数
+FigmaノードIDを指定して、デザインデータからHTML、CSS、JavaScriptを生成します。
+
+```
+=FIGMA_HTML("node-id")
+```
+
+第2引数に`prompt`を指定することで、追加指示を入れることができます。
+
+```
+=FIGMA_HTML("node-id", "prompt")
+```
+
+#### `FIGMA_QA`関数
+FigmaノードIDを指定して、デザインデータをベースに質問が行えます。
+
+```
+=FIGMA_QA("node-id", "prompt")
+```
+
 
 ### カスタムメニュー
 カスタムメニューからスクリプトを実行することもできます。カスタムメニューから`Figma2Sheet`を実行して、アクティブセルに画像を挿入します。

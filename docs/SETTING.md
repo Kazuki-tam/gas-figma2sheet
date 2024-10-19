@@ -23,6 +23,8 @@ Set the following script properties in the App Script project.
 
 - `FIGMA_API_TOKEN`: Your Figma personal access token
 - `FIGMA_FILE_KEY`: The key of the Figma file you want to import
+- `OPENAI_API_KEY`: OpenAI API key (optional / required for AI generation processing)
+- `OPENAI_MODEL`: OpenAI model (optional)
 
 ![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/jgg8v3fazw9pk7jyzqly.png)
 
@@ -34,21 +36,44 @@ The file key can be parsed from any Figma file URL:
 ## Run the script
 This project provides two methods: using it as a custom function in Google Sheets and using it as a custom menu.
 
-### Custom function
-You can use the `FIGMA_IMAGE_URL` custom function to import Figma data into Google Sheets. Specify the Node ID as the first argument to output it as an image. The Node ID can be obtained from the Figma URL. The part `node-id=x-x` in the URL is the Node ID.
+### Custom Function
+You can import Figma data into Google Sheets using custom functions. Specify the node ID as the first argument to output it as an image. The node ID can be obtained from the Figma URL. The part of the URL `node-id=x-x` is the node ID.
 
 `https://www.figma.com/design/[file_key]/[file_name]?node-id=x-x`
 
-The Node ID should be specified in a format like `0:1`.
+The node ID is specified in a format like `0:1`.
+
+#### `FIGMA_IMAGE_URL` Function
+Specify the Figma node ID to get the image URL.
 
 ```
 =FIGMA_IMAGE_URL("node-id")
 ```
 
-By combining it with the [IMAGE](https://support.google.com/docs/answer/3093333) function, you can display the image.
+By combining this with the [IMAGE](https://support.google.com/docs/answer/3093333) function, you can display the image.
 
 ```
 =IMAGE(FIGMA_IMAGE_URL("node-id"))
+```
+
+#### `FIGMA_HTML` Function
+Specify the Figma node ID to generate HTML, CSS, and JavaScript from the design data.
+
+```
+=FIGMA_HTML("node-id")
+```
+
+You can specify `prompt` as the second argument to add additional instructions.
+
+```
+=FIGMA_HTML("node-id", "prompt")
+```
+
+#### `FIGMA_QA` Function
+Specify the Figma node ID to ask questions based on the design data.
+
+```
+=FIGMA_QA("node-id", "prompt")
 ```
 
 ### Custom menu

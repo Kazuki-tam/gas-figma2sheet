@@ -30,6 +30,10 @@ async function FIGMA_HTML(
     figmaApiToken || getPropertiesService("FIGMA_API_TOKEN");
   const FIGMA_FILE_KEY = figmaFileKey || getPropertiesService("FIGMA_FILE_KEY");
 
+  if (!FIGMA_API_TOKEN || !FIGMA_FILE_KEY) {
+    throw new Error("Figma API token or file key is not set");
+  }
+
   try {
     // Retrieve node data using Figma API
     const nodeData = await getFigmaNodeData(

@@ -13,6 +13,10 @@ function insertFigmaImage(): void {
   const FIGMA_API_TOKEN = getPropertiesService("FIGMA_API_TOKEN");
   const FIGMA_FILE_KEY = getPropertiesService("FIGMA_FILE_KEY");
 
+  if (!FIGMA_API_TOKEN || !FIGMA_FILE_KEY) {
+    throw new Error("Figma API token or file key is not set");
+  }
+
   const ui = SpreadsheetApp.getUi();
   const userLocale = Session.getActiveUserLocale();
   const isJapanese = userLocale === "ja";

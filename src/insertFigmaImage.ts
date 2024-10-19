@@ -14,21 +14,27 @@ function insertFigmaImage(): void {
   const FIGMA_FILE_KEY = getPropertiesService("FIGMA_FILE_KEY");
 
   const ui = SpreadsheetApp.getUi();
+  const userLocale = Session.getActiveUserLocale();
+  const isJapanese = userLocale === "ja";
 
-  // FigmaのノードIDを入力するためのプロンプト
+  // Prompt to enter the Figma node ID
   const targetIdResponse = ui.prompt(
-    "Figmaノードの挿入",
-    "FigmaノードのターゲットIDを入力してください:",
+    isJapanese ? "Figmaノードの挿入" : "Insert Figma Node",
+    isJapanese
+      ? "FigmaノードのIDを入力してください(例 1:3)"
+      : "Please enter the ID of the Figma node(Ex. 1:3)",
     ui.ButtonSet.OK_CANCEL
   );
   if (targetIdResponse.getSelectedButton() !== ui.Button.OK) return;
 
   const targetId = targetIdResponse.getResponseText();
 
-  // 画像のサイズを調整するかどうかを確認
+  // Confirm whether to adjust the image size
   const resizeResponse = ui.alert(
-    "画像サイズの調整",
-    "画像のサイズを調整しますか？",
+    isJapanese ? "画像サイズの調整" : "Adjust Image Size",
+    isJapanese
+      ? "画像のサイズを調整しますか？"
+      : "Do you want to adjust the size of the image?",
     ui.ButtonSet.YES_NO
   );
 
@@ -36,49 +42,69 @@ function insertFigmaImage(): void {
   let height: number | "auto" | undefined;
 
   if (resizeResponse === ui.Button.YES) {
-    // 画像の幅を入力するためのプロンプト
+    // Prompt to enter the image width
     const widthResponse = ui.prompt(
-      "画像の幅",
-      "画像の幅（ピクセル）を入力してください（自動調整の場合は 'auto' または空欄）:",
+      isJapanese ? "画像の幅" : "Image Width",
+      isJapanese
+        ? "画像の幅をピクセル単位で入力してください（'auto'）"
+        : "Please enter the width of the image (in pixels) ('auto')",
       ui.ButtonSet.OK_CANCEL
     );
     if (widthResponse.getSelectedButton() !== ui.Button.OK) return;
     const widthInput = widthResponse.getResponseText().trim().toLowerCase();
-    width = widthInput === "" || widthInput === "auto" ? "auto" : Number.parseInt(widthInput, 10);
+    width =
+      widthInput === "" || widthInput === "auto"
+        ? "auto"
+        : Number.parseInt(widthInput, 10);
 
-    // 画像の高さを入力するためのプロンプト
+    // Prompt to enter the image height
     const heightResponse = ui.prompt(
-      "画像の高さ",
-      "画像の高さ（ピクセル）を入力してください（自動調整の場合は 'auto' または空欄）:",
+      isJapanese ? "画像の高さ" : "Image Height",
+      isJapanese
+        ? "画像の高さをピクセル単位で入力してください（'auto'）"
+        : "Please enter the height of the image (in pixels) ('auto')",
       ui.ButtonSet.OK_CANCEL
     );
     if (heightResponse.getSelectedButton() !== ui.Button.OK) return;
     const heightInput = heightResponse.getResponseText().trim().toLowerCase();
-    height = heightInput === "" || heightInput === "auto" ? "auto" : Number.parseInt(heightInput, 10);
+    height =
+      heightInput === "" || heightInput === "auto"
+        ? "auto"
+        : Number.parseInt(heightInput, 10);
   }
 
   try {
     const imageUrl = getFigmaImage(targetId, FIGMA_FILE_KEY, FIGMA_API_TOKEN);
 
-    // アクティブなセルに画像を挿入
+    // Insert the image into the active cell
     const activeCell = SpreadsheetApp.getActiveSpreadsheet()
       .getActiveSheet()
       .getActiveCell();
     insertImageToSheet(imageUrl, activeCell, width, height);
 
-    ui.alert("成功", "Figma画像が正常に挿入されました。", ui.ButtonSet.OK);
+    ui.alert(
+      isJapanese ? "成功" : "Success",
+      isJapanese
+        ? "Figma画像が正常に挿入されました。"
+        : "The Figma image has been successfully inserted.",
+      ui.ButtonSet.OK
+    );
   } catch (error: unknown) {
-    console.error('エラーの詳細:', error);
+    console.error("Error details:", error);
     if (error instanceof Error) {
       ui.alert(
-        "エラー",
-        `画像の挿入中にエラーが発生しました: ${error.message}`,
+        isJapanese ? "エラー" : "Error",
+        isJapanese
+          ? `画像の挿入中にエラーが発生しました: ${error.message}`
+          : `An error occurred while inserting the image: ${error.message}`,
         ui.ButtonSet.OK
       );
     } else {
       ui.alert(
-        "エラー",
-        "画像の挿入中に不明なエラーが発生しました。",
+        isJapanese ? "エラー" : "Error",
+        isJapanese
+          ? "画像の挿入中に不明なエラーが発生しました。"
+          : "An unknown error occurred while inserting the image.",
         ui.ButtonSet.OK
       );
     }
@@ -89,10 +115,17 @@ global.insertFigmaImage = insertFigmaImage;
 
 function onOpen() {
   const ui = SpreadsheetApp.getUi();
-  ui.createMenu("Figma2Sheet")
-    .addItem("Insert Figma Image", "insertFigmaImage")
-    .addToUi();
+  const userLocale = Session.getActiveUserLocale();
+
+  const menuTitle = "Figma2Sheet";
+  let menuItemTitle = "Insert Figma Image";
+
+  if (userLocale === "ja") {
+    menuItemTitle = "Figma画像を挿入";
+  }
+
+  ui.createMenu(menuTitle).addItem(menuItemTitle, "insertFigmaImage").addToUi();
 }
 
-// グローバルオブジェクトに onOpen 関数を追加
+// Add the onOpen function to the global object
 global.onOpen = onOpen;

@@ -1,9 +1,9 @@
 /**
- * 指定されたURLの画像を指定されたセルに挿入する
- * @param imageUrl 挿入する画像のURL
- * @param cell 画像を挿入するセル
- * @param width 画像の幅（ピクセルまたは "auto"）（オプション）
- * @param height 画像の高さ（ピクセルまたは "auto"）（オプション）
+ * Inserts an image from the specified URL into the specified cell.
+ * @param imageUrl The URL of the image to insert.
+ * @param cell The cell to insert the image into.
+ * @param width The width of the image (in pixels or "auto") (optional).
+ * @param height The height of the image (in pixels or "auto") (optional).
  */
 export function insertImageToSheet(
   imageUrl: string,
@@ -14,42 +14,42 @@ export function insertImageToSheet(
   const sheet = cell.getSheet();
   const row = cell.getRow();
   const column = cell.getColumn();
-  
+
   try {
-    // URLが有効かどうかチェック
+    // Check if the URL is valid
     const response = UrlFetchApp.fetch(imageUrl);
     if (response.getResponseCode() !== 200) {
-      throw new Error('画像URLが無効です');
+      throw new Error("Invalid image URL");
     }
 
-    // 画像を挿入
+    // Insert the image
     const blob = response.getBlob();
     const image = sheet.insertImage(blob, column, row, 0, 0);
-    
-    // 元の画像のサイズを取得
+
+    // Get the original size of the image
     const originalWidth = image.getWidth();
     const originalHeight = image.getHeight();
     const originalAspectRatio = originalWidth / originalHeight;
 
-    // 画像のサイズを調整
+    // Adjust the size of the image
     if (typeof width === "number" && typeof height === "number") {
-      // 両方指定されている場合
+      // Both width and height are specified
       image.setWidth(width);
       image.setHeight(height);
     } else if (typeof width === "number") {
-      // 幅のみ指定されている場合
+      // Only width is specified
       image.setWidth(width);
       image.setHeight(width / originalAspectRatio);
     } else if (typeof height === "number") {
-      // 高さのみ指定されている場合
+      // Only height is specified
       image.setHeight(height);
       image.setWidth(height * originalAspectRatio);
     }
-    // どちらも指定されていないか "auto" の場合は元のサイズのまま
+    // If neither is specified or "auto", keep the original size
 
-    console.log('画像が正常に挿入されました');
+    console.log("Image inserted successfully");
   } catch (error) {
-    console.error('画像の挿入中にエラーが発生しました:', error);
+    console.error("Error occurred while inserting the image:", error);
     throw error;
   }
 }

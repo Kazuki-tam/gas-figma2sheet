@@ -1,32 +1,20 @@
 import { getFigmaImage } from "./figma/getFigmaImage";
-import { insertImageToSheet } from "./sheet/insertImageToSheet";
 import { getPropertiesService } from "./utils/getPropertiesService";
 
 /**
  * Insert Fimga Image function
  */
 declare const global: {
-  [x: string]: (
-    targetId: string,
-    figmaFileKey?: string,
-    figmaApiToken?: string
-  ) => string;
+  [x: string]: () => void;
 };
 
-function insertFigmaImage(
-  targetId: string,
-  figmaFileKey?: string,
-  figmaApiToken?: string
-): string {
-  const FIGMA_API_TOKEN = figmaFileKey
-    ? figmaFileKey
-    : getPropertiesService("FIGMA_API_TOKEN");
-  const FIGMA_FILE_KEY = figmaApiToken
-    ? figmaApiToken
-    : getPropertiesService("FIGMA_FILE_KEY");
+function insertFigmaImage(): void {
+  const FIGMA_API_TOKEN = getPropertiesService("FIGMA_API_TOKEN");
+  const FIGMA_FILE_KEY = getPropertiesService("FIGMA_FILE_KEY");
+
+  const targetId = "";
 
   const imageUrl = getFigmaImage(targetId, FIGMA_FILE_KEY, FIGMA_API_TOKEN);
-  return imageUrl;
 }
 
 global.insertFigmaImage = insertFigmaImage;

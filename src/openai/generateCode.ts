@@ -1,17 +1,20 @@
 import { getPropertiesService } from "../utils/getPropertiesService";
+import { SYSTEM_PROMPT_DEV } from "../constants/prompt";
 
 export async function generateCode(
   nodeData: object,
   promptText?: string
 ): Promise<string> {
   const OPENAI_API_KEY = getPropertiesService("OPENAI_API_KEY");
+  const OPENAI_MODEL =
+    getPropertiesService("OPENAI_MODEL") || "gpt-4o-mini-2024-07-18";
   const url = "https://api.openai.com/v1/chat/completions";
 
   let userContent = `Figma Node Data: ${JSON.stringify(nodeData)}\n\n`;
   if (promptText) {
     userContent += `User Prompt: ${promptText}\n\n`;
   }
-  userContent += "Generate HTML, CSS, and JavaScript code based on this Figma design";
+  userContent += "Please implement accurately based on the Figma design data";
   if (promptText) {
     userContent += " and user prompt";
   }
@@ -24,11 +27,11 @@ export async function generateCode(
       "Content-Type": "application/json",
     },
     payload: JSON.stringify({
-      model: "gpt-4o-mini-2024-07-18",
+      model: OPENAI_MODEL,
       messages: [
         {
           role: "system",
-          content: "You are a skilled web developer. Generate HTML, CSS, and JavaScript code based on the provided Figma design data and user prompt if available.",
+          content: SYSTEM_PROMPT_DEV,
         },
         {
           role: "user",

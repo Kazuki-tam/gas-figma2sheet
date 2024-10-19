@@ -3,7 +3,13 @@ import { getFigmaNodeData } from "./figma/getFigmaNodeData";
 import { generateCode } from "./openai/generateCode";
 
 /**
- * Figma to HTML function
+ * Converts Figma design to HTML.
+ *
+ * @param targetId - The ID of the target node in Figma.
+ * @param promptText - Optional text to guide the code generation.
+ * @param figmaFileKey - Optional Figma file key.
+ * @param figmaApiToken - Optional Figma API token.
+ * @returns A promise that resolves to the generated HTML code.
  */
 declare const global: {
   [x: string]: (
@@ -25,20 +31,20 @@ async function FIGMA_HTML(
   const FIGMA_FILE_KEY = figmaFileKey || getPropertiesService("FIGMA_FILE_KEY");
 
   try {
-    // Figma APIを使用してノードデータを取得
+    // Retrieve node data using Figma API
     const nodeData = await getFigmaNodeData(
       FIGMA_FILE_KEY,
       FIGMA_API_TOKEN,
       targetId
     );
 
-    // OpenAI GPT-4を使用してコードを生成
+    // Generate code using OpenAI GPT-4
     const generatedCode = await generateCode(nodeData, promptText);
 
     return generatedCode;
   } catch (error) {
     console.error("Error in FIGMA_HTML:", error);
-    return "エラーが発生しました。詳細はログを確認してください。";
+    return "An error occurred. Please check the logs for details.";
   }
 }
 

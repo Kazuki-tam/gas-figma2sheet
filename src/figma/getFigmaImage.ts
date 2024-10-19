@@ -21,7 +21,7 @@ export function getFigmaImage(
   try {
     // Request to export the image
     const imageResponse = UrlFetchApp.fetch(
-      `https://api.figma.com/v1/images/${figmaFileKey}?ids=${targetId}&format=png`,
+      `https://api.figma.com/v1/images/${figmaFileKey}?ids=${targetId}&format=jpg`,
       {
         headers: {
           "X-Figma-Token": figmaApiToken,

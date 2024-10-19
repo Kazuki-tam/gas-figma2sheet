@@ -24,6 +24,10 @@ function FIGMA_IMAGE_URL(
     ? figmaApiToken
     : getPropertiesService("FIGMA_FILE_KEY");
 
+  if (!FIGMA_API_TOKEN || !FIGMA_FILE_KEY) {
+    throw new Error("Figma API token or file key is not set");
+  }
+
   const imageUrl = getFigmaImage(targetId, FIGMA_FILE_KEY, FIGMA_API_TOKEN);
   return imageUrl;
 }

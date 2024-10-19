@@ -13,6 +13,10 @@ function insertFigmaImage(): void {
   const FIGMA_API_TOKEN = getPropertiesService("FIGMA_API_TOKEN");
   const FIGMA_FILE_KEY = getPropertiesService("FIGMA_FILE_KEY");
 
+  if (!FIGMA_API_TOKEN || !FIGMA_FILE_KEY) {
+    throw new Error("Figma API token or file key is not set");
+  }
+
   const ui = SpreadsheetApp.getUi();
   const userLocale = Session.getActiveUserLocale();
   const isJapanese = userLocale === "ja";
@@ -118,13 +122,18 @@ function onOpen() {
   const userLocale = Session.getActiveUserLocale();
 
   const menuTitle = "Figma2Sheet";
-  let menuItemTitle = "Insert Figma Image";
+  let menuItemTitle1 = "Insert Figma Image";
+  let menuItemTitle2 = "Insert Figma HTML";
 
   if (userLocale === "ja") {
-    menuItemTitle = "Figma画像を挿入";
+    menuItemTitle1 = "Figmaから画像を挿入";
+    menuItemTitle2 = "FigmaからHTMLを挿入";
   }
 
-  ui.createMenu(menuTitle).addItem(menuItemTitle, "insertFigmaImage").addToUi();
+  ui.createMenu(menuTitle)
+    .addItem(menuItemTitle1, "insertFigmaImage")
+    .addItem(menuItemTitle2, "insertFigma2HTML")
+    .addToUi();
 }
 
 // Add the onOpen function to the global object

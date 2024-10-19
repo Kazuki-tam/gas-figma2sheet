@@ -2,7 +2,12 @@ import { generate } from "gas-entry-generator";
 
 async function buildForGAS() {
   const result = await Bun.build({
-    entrypoints: ["src/setFigmaImageUrl.ts", "src/insertFigmaImage.ts"],
+    entrypoints: [
+      "src/setFigmaImageUrl.ts",
+      "src/insertFigmaImage.ts",
+      "src/genFigma2HTML.ts",
+      "src/insertFigma2HTML.ts",
+    ],
     outdir: "dist",
   });
 

@@ -1,27 +1,31 @@
-# gas-bun-starter
+# gas-figma2sheet
 
-gas-bun-starter is a starter kit that uses Bun for Google Apps Script.
+This is a Google Apps Script project to import Figma data into Google Sheets.
 
 ## Status
 
-[![Release (latest by date)](https://img.shields.io/github/v/release/Kazuki-tam/gas-bun-starter)](https://github.com/Kazuki-tam/gas-bun-starter/releases/tag/v0.0.1)
-[![Issues](https://img.shields.io/github/issues/Kazuki-tam/gas-bun-starter)](https://github.com/Kazuki-tam/gas-bun-starter/issues)
+[![Release (latest by date)](https://img.shields.io/github/v/release/Kazuki-tam/gas-figma2sheet)](https://github.com/Kazuki-tam/gas-figma2sheet/releases/tag/v0.0.1)
+[![Issues](https://img.shields.io/github/issues/Kazuki-tam/gas-figma2sheet)](https://github.com/Kazuki-tam/gas-figma2sheet/issues)
 ![Maintenance](https://img.shields.io/maintenance/yes/2024)
-![Release date](https://img.shields.io/github/release-date/Kazuki-tam/gas-bun-starter)
+![Release date](https://img.shields.io/github/release-date/Kazuki-tam/gas-figma2sheet)
 
 ## Features
-- Just deploy this project code without development
+- Import Figma data into Google Sheets
+- Deploy the project code without development
 - Develop, test, and bundle TypeScript with Bun
 - Format and lint with Biome
 
 ## Main dependencies
 
-- [Google Apps Script](https://workspace.google.co.jp/intl/ja/products/apps-script/)
+- [Figma](https://www.figma.com/)
+- [Google Apps Script](https://workspace.google.com/products/apps-script/)
 - [Clasp](https://github.com/google/clasp)
 - [Biome](https://biomejs.dev/)
 
 ## Prerequisites
 
+- [Google Sheets](https://workspace.google.com/products/sheets/)
+- [Figma API](https://www.figma.com/developers/api)
 - [Bun](https://bun.sh/)
 
 ## How to use
@@ -32,16 +36,18 @@ Clone this repository and install dependencies.
 bun install
 ```
 
-### Login google account
+## Project setup
+Please refer to [SETTING.md](/docs/SETTING.md) for the setup.
+
+### Login to Google account
 
 ```shell
 bun clasp:login
 ```
 
-### Connect to your existing project
+## Connect to your existing project
 
-Create a `.clasp.json` at the root, and then Add these settings.
-Open the App script from your spreadsheet and check out a script ID on the settings page.
+Create a `.clasp.json` at the root, and then add these settings. Open the App Script from your spreadsheet and check out the script ID on the settings page. If you don't have a project, create a new spreadsheet.
 
 ```json
 {
@@ -53,33 +59,7 @@ Open the App script from your spreadsheet and check out a script ID on the setti
 Deploy your code to the existing project.
 
 ```shell
-bun release
-```
-
-## Available Commands
-
-Build your project.
-
-```shell
-bun postBuild
-```
-
-Build your local project files and deploy them to the remote project.
-
-```shell
-bun release
-```
-
-Open the current directory's clasp project on script.google.com.
-
-```shell
-bun clasp:open
-```
-
-Format and lint your project files.
-
-```shell
-bun check
+bun run deploy
 ```
 
 ## License

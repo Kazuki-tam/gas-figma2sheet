@@ -12,7 +12,7 @@ declare const global: {
   ) => string;
 };
 
-function setFigmaImageUrl(
+function FIGMA_IMAGE_URL(
   targetId: string,
   figmaFileKey?: string,
   figmaApiToken?: string
@@ -28,4 +28,4 @@ function setFigmaImageUrl(
   return imageUrl;
 }
 
-global.setFigmaImageUrl = setFigmaImageUrl;
+global.FIGMA_IMAGE_URL = FIGMA_IMAGE_URL;

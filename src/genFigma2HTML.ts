@@ -42,7 +42,7 @@ async function FIGMA_HTML(
       targetId
     );
 
-    // Generate code using OpenAI GPT-4
+    // Generate code using OpenAI GPT Model
     const generatedCode = await generateCode(nodeData, promptText);
 
     return generatedCode;

@@ -6,6 +6,7 @@ async function buildForGAS() {
       "src/setFigmaImageUrl.ts",
       "src/insertFigmaImage.ts",
       "src/genFigma2HTML.ts",
+      "src/insertFigma2HTML.ts",
     ],
     outdir: "dist",
   });

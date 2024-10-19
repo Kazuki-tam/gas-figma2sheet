@@ -26,20 +26,16 @@ App Scriptプロジェクトに以下のスクリプトプロパティを設定�
 
 ![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/jgg8v3fazw9pk7jyzqly.png)
 
-## スクリプトプロパティを設定する
+`FIGMA_FILE_KEY`はFigmaファイルURLから取得できます。たとえば、URLが`https://www.figma.com/design/xxxxxxxxxxxx/`の場合、キーは`xxxxxxxxxxxx`です。
 
-App Scriptプロジェクトに以下のスクリプトプロパティを設定します。
-
-- `FIGMA_API_TOKEN`: あなたのFigmaパーソナルアクセストークン
-- `FIGMA_FILE_KEY`: インポートしたいFigmaファイルのキー
-
-`FIGMA_FILE_KEY`はFigmaファイルURLの最後の部分です。たとえば、URLが`https://www.figma.com/design/xxxxxxxxxxxx/`の場合、キーは`xxxxxxxxxxxx`です。
-
-FigmaファイルURLからファイルキーを解析できます：
+FigmaファイルURLの全体構成：
 `https://www.figma.com/:file_type/:file_key/:file_name.`
 
 ## スクリプトを実行する
-このプロジェクトは、Google Sheetsでカスタム関数として使用する方法とカスタムメニューとして使用する方法の2つの方法を提供します。
+2通りの方法でスクリプトを実行できます。
+
+- Google Sheetsでカスタム関数として使用する方法
+- カスタムメニューとして使用する方法
 
 ### カスタム関数
 `FIGMA_IMAGE_URL`カスタム関数を使用して、FigmaデータをGoogle Sheetsにインポートできます。最初の引数としてノードIDを指定して画像として出力します。ノードIDはFigma URLから取得できます。URLの`node-id=x-x`の部分がノードIDです。

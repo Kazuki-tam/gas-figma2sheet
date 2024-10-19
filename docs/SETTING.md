@@ -26,13 +26,6 @@ Set the following script properties in the App Script project.
 
 ![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/jgg8v3fazw9pk7jyzqly.png)
 
-## Set Script Properties
-
-Set the following script properties in the App Script project.
-
-- `FIGMA_API_TOKEN`: Your Figma personal access token
-- `FIGMA_FILE_KEY`: The key of the Figma file you want to import
-
 The `FIGMA_FILE_KEY` is the last part of the Figma file URL. For example, if the URL is `https://www.figma.com/design/xxxxxxxxxxxx/`, the key is `xxxxxxxxxxxx`.
 
 The file key can be parsed from any Figma file URL:

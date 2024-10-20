@@ -41,6 +41,7 @@ export async function generateCode(
     },
     payload: JSON.stringify({
       model: OPENAI_MODEL,
+      temperature: 0.2,
       messages: [
         {
           role: "system",

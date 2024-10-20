@@ -46,6 +46,7 @@ export async function generateQA(
     },
     payload: JSON.stringify({
       model: OPENAI_MODEL,
+      temperature: 0.6,
       messages: [
         {
           role: "system",

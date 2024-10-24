@@ -3,6 +3,7 @@ import { generate } from "gas-entry-generator";
 async function buildForGAS() {
   const result = await Bun.build({
     entrypoints: [
+      "src/customMenu.ts",
       "src/customFuncFigmaImageUrl.ts",
       "src/customMenuFigmaImage.ts",
       "src/customFuncFigma2HTML.ts",

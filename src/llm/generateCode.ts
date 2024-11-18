@@ -60,11 +60,10 @@ export async function generateCode(
   }
 
   // Generate the code using the Gemini API
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/${aiConfig.model}:generateContent`;
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/${aiConfig.model}:generateContent?key=${aiConfig.apiKey}`;
   const options: GoogleAppsScript.URL_Fetch.URLFetchRequestOptions = {
     method: "post",
     headers: {
-      Authorization: `Bearer ${aiConfig.apiKey}`,
       "Content-Type": "application/json",
     },
     payload: JSON.stringify({

@@ -1,11 +1,11 @@
 # Setting up the project
-This is a Google Apps Script project that retrieves data from Figma and imports image data into Google Sheets via the API. Follow the steps below to set it up.
+This Google Apps Script project retrieves data from Figma and performs tasks based on design data via the API.
 
 1. Obtain an access token to use the [Figma API](https://www.figma.com/developers/api).
 2. Set script properties in your Google Apps Script project.
 3. Run the script.
 
-## Create a personal access token
+## Create a personal access token for Figma
 Create your personal access token on the Figma account settings page. This token is used to access the Figma API.
 
 Access tokens are sensitive information. Do not expose them in your code or in untrusted environments.
@@ -23,8 +23,6 @@ Set the following script properties in the App Script project.
 
 - `FIGMA_API_TOKEN`: Your Figma personal access token
 - `FIGMA_FILE_KEY`: The key of the Figma file you want to import
-- `OPENAI_API_KEY`: OpenAI API key (optional / required for AI generation processing)
-- `OPENAI_MODEL`: OpenAI model (optional)
 
 ![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/jgg8v3fazw9pk7jyzqly.png)
 
@@ -32,6 +30,23 @@ The `FIGMA_FILE_KEY` is the last part of the Figma file URL. For example, if the
 
 The file key can be parsed from any Figma file URL:
 `https://www.figma.com/:file_type/:file_key/:file_name.`
+
+### Optional
+To use AI features, you need to set the following script properties.
+
+#### Google Gemini API
+- `GOOGLE_GEMINI_API_KEY`: Google Gemini API key (Required for AI generation processing)
+- `GOOGLE_GEMINI_MODEL`: Google Gemini model (default: `gemini-1.5-flash`)
+
+https://ai.google.dev/gemini-api/docs
+
+---
+
+#### OpenAI API
+- `OPENAI_API_KEY`: OpenAI API key (Required for AI generation processing)
+- `OPENAI_MODEL`: OpenAI model (default: `gpt-4o-mini`)
+
+https://openai.com/api/
 
 ## Run the script
 This project provides two methods: using it as a custom function in Google Sheets and using it as a custom menu.
@@ -77,6 +92,6 @@ Specify the Figma node ID to ask questions based on the design data.
 ```
 
 ### Custom menu
-You can also run the script from the custom menu. Run the `Figma2Sheet` from the custom menu to insert the image into the active cell.
+You can also run the script from the custom menu.
 
 ![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/aq3yjozs802nevlgqiok.png)

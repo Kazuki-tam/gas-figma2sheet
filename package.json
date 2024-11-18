@@ -1,6 +1,6 @@
 {
   "name": "gas-figma2sheet",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "A Google Apps Script project to import Figma data into Google Sheets.",
   "author": "Kazuki Yonemoto (https://dev.to/tim_yone)",
   "license": "MIT",
@@ -10,6 +10,7 @@
     "copy": "bun run _tasks/copy.ts",
     "deploy": "npm-run-all clean copy postBuild clasp:push",
     "open": "clasp open",
+    "login": "clasp login",
     "clasp:push": "clasp push -f",
     "clasp:open": "clasp open",
     "clasp:login": "clasp login",

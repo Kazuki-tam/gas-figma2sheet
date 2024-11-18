@@ -1,11 +1,13 @@
 # プロジェクトの設定
-このGoogle Apps Scriptプロジェクトは、Figmaからデータを取得し、APIを介して画像データをGoogle Sheetsにインポートします。以下の手順にしたがって設定してください。
+このGoogle Apps Scriptプロジェクトは、Figmaからデータを取得し、APIを介してデザインデータに基づいたタスクを実行します。
+
+以下の手順にしたがって設定してください。
 
 1. [Figma API](https://www.figma.com/developers/api)を使用するためのアクセストークンを取得します。
 2. Google Apps Scriptプロジェクトにスクリプトプロパティを設定します。
 3. スクリプトを実行します。
 
-## 個人アクセストークンを作成する
+## Figma 個人アクセストークンを作成する
 Figmaのアカウント設定ページでパーソナルアクセストークンを作成します。このトークンはFigma APIにアクセスするために使用されます。
 
 アクセストークンは機密情報です。コード内や信頼できない環境で直接公開しないでください。
@@ -23,8 +25,6 @@ App Scriptプロジェクトに以下のスクリプトプロパティを設定�
 
 - `FIGMA_API_TOKEN`: あなたのFigmaパーソナルアクセストークン
 - `FIGMA_FILE_KEY`: インポートしたいFigmaファイルのキー
-- `OPENAI_API_KEY`: OpenAI APIキー（オプション / AIによる生成処理では必須）
-- `OPENAI_MODEL`: OpenAIモデル（オプション）
 
 ![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/jgg8v3fazw9pk7jyzqly.png)
 
@@ -32,6 +32,23 @@ App Scriptプロジェクトに以下のスクリプトプロパティを設定�
 
 FigmaファイルURLの全体構成：
 `https://www.figma.com/:file_type/:file_key/:file_name.`
+
+### オプション
+AI機能を使用する場合は、以下のスクリプトプロパティを設定する必要があります。
+
+#### Google Gemini API
+- `GOOGLE_GEMINI_API_KEY`: Google Gemini APIキー（AIによる生成処理では必須）
+- `GOOGLE_GEMINI_MODEL`: Google Geminiモデル（デフォルト: `gemini-1.5-flash`）
+
+https://ai.google.dev/gemini-api/docs
+
+---
+
+#### OpenAI API
+- `OPENAI_API_KEY`: OpenAI APIキー（AIによる生成処理では必須）
+- `OPENAI_MODEL`: OpenAIモデル（デフォルト: `gpt-4o-mini`）
+
+https://openai.com/api/
 
 ## スクリプトを実行する
 2通りの方法でスクリプトを実行できます。
@@ -81,6 +98,6 @@ FigmaノードIDを指定して、デザインデータをベースに質問が�
 
 
 ### カスタムメニュー
-カスタムメニューからスクリプトを実行することもできます。カスタムメニューから`Figma2Sheet`を実行して、アクティブセルに画像を挿入します。
+カスタムメニューからスクリプトを実行することもできます。
 
 ![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/aq3yjozs802nevlgqiok.png)

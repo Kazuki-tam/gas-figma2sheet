@@ -1,6 +1,6 @@
 import { getPropertiesService } from "./utils/getPropertiesService";
 import { getFigmaNodeData } from "./figma/getFigmaNodeData";
-import { generateCode } from "./openai/generateCode";
+import { generateCode } from "./llm/generateCode";
 
 /**
  * Inserts Figma design as HTML code in the active cell.

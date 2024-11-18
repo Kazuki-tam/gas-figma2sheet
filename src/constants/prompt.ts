@@ -1,3 +1,4 @@
+// HTML format for the developer prompt
 const HTML_FORMAT = `
 <!DOCTYPE html>
 <html lang="en">

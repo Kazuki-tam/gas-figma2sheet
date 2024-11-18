@@ -1,3 +1,12 @@
+/**
+ * Fetches data for a specific node from a Figma file using the Figma API.
+ *
+ * @param fileKey - The key of the Figma file.
+ * @param apiToken - The API token for authenticating with the Figma API.
+ * @param nodeId - The ID of the node to fetch data for.
+ * @returns A promise that resolves to an object containing the document, components, and styles of the specified node.
+ * @throws Will throw an error if the Figma API response code is not 200.
+ */
 export function getFigmaNodeData(
   fileKey: string,
   apiToken: string,

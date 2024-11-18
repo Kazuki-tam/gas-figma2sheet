@@ -1,6 +1,6 @@
-import { getAIConfig } from "../utils/getAIConfig";
-import { SYSTEM_PROMPT_DEV } from "../constants/prompt";
-import { AI_PROVIDERS } from "../constants/llm-models";
+import { getAIConfig } from "@/utils/getAIConfig";
+import { SYSTEM_PROMPT_DEV } from "@/constants/prompt";
+import { AI_PROVIDERS } from "@/constants/llm-models";
 
 /**
  * Generates code based on Figma node data and an optional user prompt using OpenAI's API.

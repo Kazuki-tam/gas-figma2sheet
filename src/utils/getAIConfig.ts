@@ -9,15 +9,8 @@ export function getAIConfig(): AIConfig {
   const geminiModel =
     getPropertiesService("GEMINI_MODEL") || "gemini-1.5-flash";
 
-  // Check if both AI models are set
-  if (openaiModel && geminiModel) {
-    throw new Error(
-      "Both AI models (OPENAI_MODEL and GEMINI_MODEL) are set. Please set only one."
-    );
-  }
-
   // Check if both AI API keys are set
-  if (openaiApiKey && openaiModel) {
+  if (openaiApiKey) {
     return {
       provider: AI_PROVIDERS.OPENAI,
       apiKey: openaiApiKey,
@@ -25,11 +18,9 @@ export function getAIConfig(): AIConfig {
     };
   }
 
-  // Check if either AI API key is set
-  if (!geminiApiKey || !openaiApiKey) {
-    throw new Error(
-      "AI API key is not set. Please set either GEMINI_API_KEY or OPENAI_API_KEY."
-    );
+  // Check if Gemini AI API keys are set
+  if (!geminiApiKey) {
+    throw new Error("AI API keys are not configured");
   }
 
   return {

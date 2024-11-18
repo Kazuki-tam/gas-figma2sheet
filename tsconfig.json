@@ -15,6 +15,10 @@
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
     "allowJs": true,
-    "types": ["bun-types", "google-apps-script"]
+    "types": ["bun-types", "google-apps-script"],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    }
   }
 }

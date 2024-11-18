@@ -1,6 +1,6 @@
 import { getPropertiesService } from "./utils/getPropertiesService";
 import { getFigmaNodeData } from "./figma/getFigmaNodeData";
-import { generateQA } from "./openai/generateQA";
+import { generateQA } from "./llm/generateQA";
 
 /**
  * Answers questions about Figma design.

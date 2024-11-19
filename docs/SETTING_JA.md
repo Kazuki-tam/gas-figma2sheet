@@ -37,8 +37,8 @@ FigmaファイルURLの全体構成：
 AI機能を使用する場合は、以下のスクリプトプロパティを設定する必要があります。
 
 #### Google Gemini API
-- `GOOGLE_GEMINI_API_KEY`: Google Gemini APIキー（AIによる生成処理では必須）
-- `GOOGLE_GEMINI_MODEL`: Google Geminiモデル（デフォルト: `gemini-1.5-flash`）
+- `GEMINI_API_KEY`: Google Gemini APIキー（AIによる生成処理では必須）
+- `GEMINI_MODEL`: Google Geminiモデル（デフォルト: `gemini-1.5-flash`）
 
 https://ai.google.dev/gemini-api/docs
 

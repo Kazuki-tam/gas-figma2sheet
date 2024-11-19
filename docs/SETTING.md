@@ -35,8 +35,8 @@ The file key can be parsed from any Figma file URL:
 To use AI features, you need to set the following script properties.
 
 #### Google Gemini API
-- `GOOGLE_GEMINI_API_KEY`: Google Gemini API key (Required for AI generation processing)
-- `GOOGLE_GEMINI_MODEL`: Google Gemini model (default: `gemini-1.5-flash`)
+- `GEMINI_API_KEY`: Google Gemini API key (Required for AI generation processing)
+- `GEMINI_MODEL`: Google Gemini model (default: `gemini-1.5-flash`)
 
 https://ai.google.dev/gemini-api/docs
 
